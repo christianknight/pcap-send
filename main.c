@@ -12,6 +12,10 @@ int main(int argc, char const *argv[])
 {
 	printf("pcap-send\n");	// print program name
 
+	const char *verStr;				// to hold libpcap version string
+	verStr = pcap_lib_version();	// retrieve libpcap version
+	printf("%s\n", verStr);			// print libpcap version
+
 	// list out passed arguments
 	printf("argc = %d\n", argc);
     for (int i = 0; i < argc; i++) {
