@@ -16,6 +16,8 @@
 
 #define MAX_PACKET_SIZE 1500	// maximum Ethernet II frame size
 
+static const uint8_t mac_address_src[6] = {0x00, 0xF1, 0xF3, 0x17, 0x6C, 0xC2};
+
 int main(int argc, char const *argv[])
 {
 	printf("pcap-send\n");	// print program name
@@ -54,8 +56,8 @@ int main(int argc, char const *argv[])
 
 	memset(packetData, 0, len * sizeof(u_char));	// set entire data buffer to 0's
 
-	memset(packetData + IDX_DEST_ADDRESS, 0xFF, 6 * sizeof(u_char));    /* Set destination to broadcast */
-	memset(packetData + IDX_SRC_ADDRESS, 0xFF, 6 * sizeof(u_char));	    /* Set source to broadcast */
+	memset(packetData + IDX_DEST_ADDRESS, 0xFF, 6 * sizeof(u_char));                /* Set destination to broadcast */
+	memcpy(packetData + IDX_SRC_ADDRESS, mac_address_src, 6 * sizeof(uint8_t));	    /* Set source address */
 	packetData[IDX_ETHERTYPE] = 0x00;
 	packetData[IDX_ETHERTYPE + 1] = 0x00;
 
