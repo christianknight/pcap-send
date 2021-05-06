@@ -4,7 +4,7 @@ Program to send an empty (all 0's) Ethernet II packet using the libpcap "pcap_se
 
 ## Building
 
-Compile with "gcc main.c -o pcap-send -lpcap -Wall".
+Run 'make' to build the executable 'pcap-send'
 
 ## Running
 
