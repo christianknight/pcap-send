@@ -1,6 +1,6 @@
 # pcap-send
 
-Program to send an empty (all 0's) Ethernet II packet using the libpcap "pcap_sendpacket()" function.
+Program to send an Ethernet II packet using the libpcap "pcap_sendpacket()" function.
 
 ## Building
 

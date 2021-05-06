@@ -6,6 +6,14 @@
 #include <string.h>
 #include <pcap.h>
 
+/* Data indexes for Ethernet II frame */
+#define IDX_DEST_ADDRESS   0
+#define IDX_SRC_ADDRESS    (IDX_DEST_ADDRESS + 6)
+#define IDX_ETHERTYPE      (IDX_SRC_ADDRESS + 6)
+#define IDX_PAYLOAD        (IDX_ETHERTYPE + 2)
+
+#define HEADER_SIZE 14     /* Source/destination addresses and EtherType */
+
 #define MAX_PACKET_SIZE 1500	// maximum Ethernet II frame size
 
 int main(int argc, char const *argv[])
@@ -45,6 +53,11 @@ int main(int argc, char const *argv[])
 	char errbuf[PCAP_ERRBUF_SIZE];		// pcap error message buffer
 
 	memset(packetData, 0, len * sizeof(u_char));	// set entire data buffer to 0's
+
+	memset(packetData + IDX_DEST_ADDRESS, 0xFF, 6 * sizeof(u_char));    /* Set destination to broadcast */
+	memset(packetData + IDX_SRC_ADDRESS, 0xFF, 6 * sizeof(u_char));	    /* Set source to broadcast */
+	packetData[IDX_ETHERTYPE] = 0x00;
+	packetData[IDX_ETHERTYPE + 1] = 0x00;
 
 	pcap_t *m_fp;	// declare the pcap struct
 
